@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/user',[UserController::class,'update'])->middleware('auth:sanctum');
 Route::post('/reset-password',[UserController::class,'updatePassword'])->middleware('auth:sanctum');
+Route::put('/products/{id}',[ProductController::class,'update'])->middleware('auth:sanctum');
+Route::resource('products',ProductController::class)->middleware('auth:sanctum');
