@@ -24,6 +24,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/user',[UserController::class,'update'])->middleware('auth:sanctum');
+Route::get('/user/products',[ProductController::class,'userProducts'])->middleware('auth:sanctum');
 Route::post('/reset-password',[UserController::class,'updatePassword'])->middleware('auth:sanctum');
+Route::post('/products/user/assign',[ProductController::class,'assign']);
+Route::delete('/products/user/remove',[ProductController::class,'remove']);
 Route::put('/products/{id}',[ProductController::class,'update'])->middleware('auth:sanctum');
 Route::resource('products',ProductController::class)->middleware('auth:sanctum');

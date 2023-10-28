@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\User;
 
 class ProductController extends Controller
 {
@@ -67,4 +68,40 @@ class ProductController extends Controller
          $result =Product::where('id',$id)->delete()?['result'=>'ok'] :['result'=>'failure'];
             return $result;
     }
-}
+
+
+	public function assign(Request $request){
+		 $validated = $request->validate([
+            'product_id' => 'required|integer',
+            'user_id' => 'required|integer',
+        ]);
+	#	 var_dump($validated);
+	User::find($validated['user_id'])->products()->attach($validated['product_id']);
+	$result = User::find($validated['user_id'])->products()->find($validated['product_id']);
+	#var_dump($result);
+	return $result ? ['result'=>'done'] : ['result'=>'error'];
+	}
+
+ 	public function remove(Request $request){
+                 $validated = $request->validate([
+            'product_id' => 'required|integer',
+            'user_id' => 'required|integer',
+        ]);
+        #        var_dump($validated);
+        User::find($validated['user_id'])->products()->detach($validated['product_id']);
+        $result = !User::find($validated['user_id'])->products()->find($validated['product_id']);
+        #var_dump($result);
+        return $result ? ['result'=>'done'] : ['result'=>'error'];
+	}
+
+
+	public function userProducts(Request $request){
+	return $request->user()->products()->paginate(10);
+	
+	}
+
+
+
+
+	}
+
