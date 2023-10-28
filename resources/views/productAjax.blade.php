@@ -22,7 +22,9 @@
             <tr>
                 <th>No</th>
                 <th>Name</th>
-                <th>Details</th>
+                <th>Slug</th>
+                <th>image</th>
+                <th>description</th>
                 <th width="280px">Action</th>
             </tr>
         </thead>
@@ -44,13 +46,15 @@
                         <label for="name" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-12">
                             <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" value="" maxlength="50" required="">
+                            <input type="text" class="form-control" id="slug" name="slug" placeholder="Enter Slug" value="" maxlength="50" required="">
+                            <input type="text" class="form-control" id="image" name="image" placeholder="Image url/name" value="" maxlength="50" required="">
                         </div>
                     </div>
        
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Details</label>
                         <div class="col-sm-12">
-                            <textarea id="detail" name="detail" required="" placeholder="Enter Details" class="form-control"></textarea>
+                            <textarea id="description" name="description" required="" placeholder="Enter Details" class="form-control"></textarea>
                         </div>
                     </div>
         
@@ -92,7 +96,9 @@
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'name', name: 'name'},
-            {data: 'detail', name: 'detail'},
+            {data: 'slug', name: 'slug'},
+            {data: 'image', name: 'image'},
+            {data: 'description', name: 'description'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
@@ -123,7 +129,9 @@
           $('#ajaxModel').modal('show');
           $('#product_id').val(data.id);
           $('#name').val(data.name);
-          $('#detail').val(data.detail);
+          $('#slug').val(data.slug);
+          $('#image').val(data.image);
+          $('#description').val(data.description);
       })
     });
       

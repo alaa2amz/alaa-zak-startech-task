@@ -1,11 +1,11 @@
 <?php
-           
+         
 namespace App\Http\Controllers;
-            
+          
 use App\Models\Product;
 use Illuminate\Http\Request;
 use DataTables;
-          
+        
 class ProductAjaxController extends Controller
 {
     /**
@@ -15,11 +15,9 @@ class ProductAjaxController extends Controller
      */
     public function index(Request $request)
     {
-     
+   
         if ($request->ajax()) {
-  
-            $data = Product::latest()->get();
-  
+            $product = Product::latest()->get();
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -33,10 +31,11 @@ class ProductAjaxController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        
-        return view('productAjax');
+        #####
+	$product = Product::latest()->get();      
+        return view('productAjax',compact('product'));
     }
-       
+     
     /**
      * Store a newly created resource in storage.
      *
@@ -46,21 +45,17 @@ class ProductAjaxController extends Controller
     public function store(Request $request)
     {
         Product::updateOrCreate([
-                    'id' => $request->product_id
-                ],
-                [
-                    'name' => $request->name, 
-                    'slug' => $request->slug, 
-		    'image'=> $request->image,
-                    'description' => $request->description
-                ]);        
-     
+                'id' => $request->id,
+                'title' => $request->title,
+                'description' => $request->description
+        ]);        
+   
         return response()->json(['success'=>'Product saved successfully.']);
     }
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Product
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -68,19 +63,19 @@ class ProductAjaxController extends Controller
         $product = Product::find($id);
         return response()->json($product);
     }
-    
+  
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Product
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         Product::find($id)->delete();
-      
+     
         return response()->json(['success'=>'Product deleted successfully.']);
     }
 }
-
+ 
 

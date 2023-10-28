@@ -28,7 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('/products', [ProductAjaxController::class,'index'])->name('products-ajax-crud.index');
-Route::post('/products', [ProductAjaxController::class,'index'])->name('products-ajax-crud.store');
-#Route::resource('products', ProductAjaxController::class)->name('*','products-ajax-crud');
+Route::resource('products-ajax-crud', ProductAjaxController::class);
+# Route::get('/products', [ProductAjaxController::class,'index'])->name('products-ajax-crud.index');
+# Route::post('/products', [ProductAjaxController::class,'index'])->name('products-ajax-crud.store');
+#det Route::resource('products', ProductAjaxController::class)->name('*','products-ajax-crud');
 require __DIR__.'/auth.php';
