@@ -25,6 +25,7 @@
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
+                <th>Products list</th>
               <!--  <th>Password</th> -->
                 <th width="280px">Action</th>
             </tr>
@@ -111,6 +112,8 @@
             {data: 'last_name', name: 'last_name'},
             {data: 'email', name: 'email'},
             {data: 'phone_number', name: 'phone_number'},
+            {data: 'product_list[]', name: 'product_list',render: array=> array.map(item=>'<a href="">'+'@ '+item+'</a>').join('<br/>')},
+            //{data: 'product_list[, ]', name: 'product_list'},
             //{data: 'password', name: 'password'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]

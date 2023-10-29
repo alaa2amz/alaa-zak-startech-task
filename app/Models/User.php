@@ -11,11 +11,18 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Product;
 use App\Models\Role;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+
+protected $appends =[
+    'product_list'
+  ];
+
 
     /**
      * The attributes that are mass assignable.
@@ -55,6 +62,36 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Product::class)->withTimestamps();
     }
+
+
+/*
+    public function getProductslist(){
+	    $list=[];
+	    foreach($this->products()->get() as $product){
+	    $list[]=$product->name;
+	    }
+	return join(',',$list).'ooo';
+    
+    }
+ */
+
+
+protected function productList(): Attribute
+    {
+        return Attribute::make(
+            get: function (){
+            $list=[];
+            foreach($this->products()->get() as $product){
+            $list[]=$product->name;
+            }
+        //return join(', ',$list);
+        return $list;
+
+    }
+,
+        );
+    }
+
 
 
      public function roles(): BelongsToMany

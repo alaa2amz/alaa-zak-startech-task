@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use Mail;
 use App\Models\User;
+use App\Models\Verify;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,26 +14,16 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-	///////////////////////////start
-
-
-
-
-    /**
-     * Create User
-     * @param Request $request
-     * @return User 
-     */
     public function createUser(Request $request)
     {
         try {
-            //Validated
             $validateUser = Validator::make($request->all(), 
             [
                 'first_name' => 'required',
                 'last_name' => 'required',
                 'email' => 'required|email|unique:users,email',
-                'phone_number' => 'digits:11',
+                //'phone_number' => 'digits:11',
+                'phone_number' => 'required',
                 'password' => 'required'
             ]);
 
@@ -51,11 +43,33 @@ class AuthController extends Controller
                 'password' => Hash::make($request->password)
             ]);
 
-#	    event(new Registered($user));
-	    
+	    //event(new Registered($user));
+
+	$pin=random_int(1000,9999);
+ 	Verify::create([
+              'email' => $user->email, 
+              'token' =>  Hash::make($pin),
+            ]);
+
+	$verify_link=route('verify');
+	$mail_message=<<EOD
+		Thanks for regestering.
+		please click the link below
+		to complete registeration process
+		<a href="$verify_link?token=$pin">$verify_link?token=$pin<\a>
+		END
+EOD
+
+        Mail::raw($mail_message, function($message) use($request){
+              $message->to($request->email);
+              $message->subject('Email Verification Mail');
+          });
+         
+
+
 	    return response()->json([
                 'status' => true,
-                'message' => 'User Created Successfully',
+                'message' => 'User Created Successfully please Check mail for verification link',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
 
@@ -113,9 +127,46 @@ class AuthController extends Controller
                 'message' => $th->getMessage()
             ], 500);
         }
+
+
+
+	public function verifyUser(Request $request){
+		$email=$request->email;
+		$token=$request->token;
+		$hash= Hash::make($token);
+		$email?: return "no Email";
+		$token?: return "no Token";
+		$result=$Verify::where('email',$email)->where('token',$hash)->latest()->first();
+		if($result){
+			User::where('email',$email)->update('email_verified_at',now()
+				return "verification success";
+		}else
+			return "Error";
+			
+
+	
+	}
+
+	
+	function resend(Request $request){
+	 $mail_message=<<EOD
+                Thanks for regestering.
+                please click the link below
+                to complete registeration process
+                <a href="$verify_link?token=$pin">$verify_link?token=$pin<\a>
+                END
+EOD
+
+        $result=Mail::raw($mail_message, function($message) use($request){
+              $message->to($request->email);
+              $message->subject('Email Verification Mail');
+          });
+	$result? return "sent":return "error"
+	
+	}
+
     }
 
 
 
-	//////////////////////////end
 }

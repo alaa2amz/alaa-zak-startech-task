@@ -25,6 +25,7 @@
                 <th>Slug</th>
                 <th>Image</th>
                 <th>Description</th>
+                <th>Users</th>
                 <th width="280px">Action</th>
             </tr>
         </thead>
@@ -103,11 +104,15 @@
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'name', name: 'name'},
             {data: 'slug', name: 'slug'},
-            {data: 'image', name: 'image'},
+            {data: 'image', name: 'image',render:x=>'<img src="'+x+'" width="128"  />'},
             {data: 'description', name: 'description'},
+            {data: 'user_list[]', name: 'user_list',render: array=> array.map(item=>'<a href="">'+'@ '+item+'</a>').join('<br/>')},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
+
+
+
       
     /*------------------------------------------
     --------------------------------------------

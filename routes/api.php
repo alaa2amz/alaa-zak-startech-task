@@ -16,8 +16,10 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::post('/auth/register', [AuthController::class, 'createUser']);
-Route::post('/auth/login', [AuthController::class, 'loginUser']);
+Route::post('/register', [AuthController::class, 'createUser']);
+Route::post('/login', [AuthController::class, 'loginUser']);
+Route::post('/verify', [AuthController::class, 'verifyUser'])->name('verify');
+Route::post('/resend', [AuthController::class, 'resend'])->name('resend');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

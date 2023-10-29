@@ -22,7 +22,8 @@ class ProductFactory extends Factory
         return [
 		'name' => $name,
 		'slug' => $slug,
-		'image' => $slug.'.jpg',
+		//'image' => $slug.'.jpg',
+		'image' => fake()->imageUrl(128, 128, 'animals', true),
 		'description' => fake()->realText(300),
 
 
