@@ -14,7 +14,8 @@ class UserController extends Controller
                 'first_name' => 'required',
                 'last_name' => 'required',
                 'email' => 'required|email|unique:users,email,'.$request->user()->id,
-                'phone_number' => 'digits:11',
+                //'phone_number' => 'digits:11',
+                'phone_number' => 'required',
             ]);
 
             if($validateUser->fails()){

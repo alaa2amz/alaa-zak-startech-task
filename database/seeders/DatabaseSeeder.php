@@ -7,10 +7,13 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use  App\Models\User;
 use App\Models\Product;
+use  App\Models\Role;
+
+
 class DatabaseSeeder extends Seeder
 {
 	static public $user_count=10;
-	static public $product_count=10;
+	static public $product_count=50;
 	static public $product_user_count=7;
 	use WithoutModelEvents;    
 	/**
@@ -18,6 +21,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+	    $admin=User::create(['first_name'=>'admin',
+		    'last_name'=>'admin',
+		    'email' => 'admin@admin.com',
+		    'phone_number'=>'0011111111111',
+		    'email_verified_at'=>now(),
+		    'password'=>'password',
+
+	    ]);   
+
+	     $notadmin=User::create(['first_name'=>'notadmin',
+                    'last_name'=>'notadmin',
+                    'email' => 'notadmin@notadmin.com',
+                    'phone_number'=>'00222222222',
+                    'email_verified_at'=>now(),
+                    'password'=>'password',
+
+            ]);
+	    
+	    $admin->roles()->attach('1');
+
          User::factory(self::$user_count)->create();
    	 Product::factory(self::$product_count)->create();
 	 $total_product_count=Product::all()->count(); 

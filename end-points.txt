@@ -1,0 +1,50 @@
+api
+
+
+regester new user:
+curl http://localhost:8000/api/register -X POST -d first_name=ali -d last_name=hamed -d email=alihamed@gmail.com.com -d phone_number=0111232345 -d password=password
+
+verify user:
+curl http://localhost:8000/api/verify -X POST -d email=alihamed@gmail.com.com  -d token=9904 
+
+login with email:
+~/s/sblade$curl http://localhost:8000/api/login -X POST -d email=alihamed@gmail.com.com  -d password=password
+
+login with phone number:
+~/s/sblade$curl http://localhost:8000/api/login -X POST -d phone_number=0111232345  -d password=password
+
+get usr information:
+curl -H "Authorization: Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"  http://localhost:8000/api/user/ -X GET
+
+update user information:
+$curl -H "Authorization: Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"  http://localhost:8000/api/user/ -X POST   -d first_name=alaa -d last_name=zaak -d email=alihamed@gmail.com -d phone_number=0112232345 
+
+change password:
+curl -H "Authorization: Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"  http://localhost:8000/api/reset-password -X POST   -d new_password=123
+
+---------------------------------
+
+create product:
+curl -H "Authorization: Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"  http://localhost:8000/api/products -X POST   -d name=kanji -d slug=ccz -d image=kanji.jpg -d description=dictionary
+
+get product information:
+curl -H "Authorization: Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"  http://localhost:8000/api/products/1339  -X GET
+
+update product:
+curl -H "Authorization: Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"  http://localhost:8000/api/products/1343 -X PUT   -d name=kanji -d slug=ccz -d image=kanji.jpg -d description=dddddictionary 
+
+delete product:
+curl -H "Authorization: Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"  http://localhost:8000/api/products/1343 -X DELETE
+
+get all products with pagination:
+curl -H "Authorization: Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"  http://localhost:8000/api/products -X GET 
+
+assign product to user:
+curl -H "Authorization: Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"  http://localhost:8000/api/products/user/assign -X POST -d user_id=1 -d product_id=1339
+
+get logged user products with pagination:
+curl -H "Authorization: Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"  http://localhost:8000/api/user/products -X GET
+
+
+
+

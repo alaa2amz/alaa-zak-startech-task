@@ -52,13 +52,12 @@ class AuthController extends Controller
             ]);
 
 	$verify_link=route('verify');
-	$mail_message=<<EOD
+	$mail_message=<<<EOD
 		Thanks for regestering.
 		please click the link below
 		to complete registeration process
 		<a href="$verify_link?token=$pin">$verify_link?token=$pin<\a>
-		END
-EOD
+EOD;
 
         Mail::raw($mail_message, function($message) use($request){
               $message->to($request->email);
@@ -89,7 +88,8 @@ EOD
     public function loginUser(Request $request)
     {
 	$loginField = $request->email?'email':'phone_number';
-	$loginValidation = $request->email?'required|email':'required|digits:11';    
+	$loginValidation = $request->email?'required|email':'required';    
+	//$loginValidation = $request->email?'required|email':'required|digits:11';    
         try {
             $validateUser = Validator::make($request->all(), 
             [
@@ -128,18 +128,19 @@ EOD
             ], 500);
         }
 
-
+    }
 
 	public function verifyUser(Request $request){
 		$email=$request->email;
 		$token=$request->token;
-		$hash= Hash::make($token);
-		$email?: return "no Email";
-		$token?: return "no Token";
-		$result=$Verify::where('email',$email)->where('token',$hash)->latest()->first();
-		if($result){
-			User::where('email',$email)->update('email_verified_at',now()
-				return "verification success";
+		//$hash= Hash::make($token);
+		if(!$email) {return "no Email";}
+		if (!$token){ return "no Token";}
+		$result=Verify::where('email',$email)->first();
+
+		if(Hash::check($token,$result->token)){
+			User::where('email',$email)->update(['email_verified_at'=>now()]);
+			return "verification success";
 		}else
 			return "Error";
 			
@@ -149,23 +150,23 @@ EOD
 
 	
 	function resend(Request $request){
-	 $mail_message=<<EOD
+	 $mail_message=<<<EOD
                 Thanks for regestering.
                 please click the link below
                 to complete registeration process
                 <a href="$verify_link?token=$pin">$verify_link?token=$pin<\a>
                 END
-EOD
+EOD;
 
         $result=Mail::raw($mail_message, function($message) use($request){
               $message->to($request->email);
               $message->subject('Email Verification Mail');
           });
-	$result? return "sent":return "error"
+	return $result ?  "sent": "error";
 	
 	}
 
-    }
+    
 
 
 

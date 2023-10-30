@@ -31,8 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware('auth','is-admin')->group(function () {
 Route::resource('assign', AssignAjaxController::class);
-Route::resource('aaa', AssignAjaxController::class);
 Route::resource('products', ProductAjaxController::class);
 Route::resource('users', UserAjaxController::class);
+});
+
 require __DIR__.'/auth.php';

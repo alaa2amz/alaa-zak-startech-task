@@ -20,14 +20,12 @@ Route::post('/register', [AuthController::class, 'createUser']);
 Route::post('/login', [AuthController::class, 'loginUser']);
 Route::post('/verify', [AuthController::class, 'verifyUser'])->name('verify');
 Route::post('/resend', [AuthController::class, 'resend'])->name('resend');
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
+Route::get('/user', function (Request $request) {return $request->user();})->middleware('auth:sanctum');
 Route::post('/user',[UserController::class,'update'])->middleware('auth:sanctum');
-Route::get('/user/products',[ProductController::class,'userProducts'])->middleware('auth:sanctum');
 Route::post('/reset-password',[UserController::class,'updatePassword'])->middleware('auth:sanctum');
+
+
+Route::get('/user/products',[ProductController::class,'userProducts'])->middleware('auth:sanctum');
 Route::post('/products/user/assign',[ProductController::class,'assign']);
 Route::delete('/products/user/remove',[ProductController::class,'remove']);
 Route::put('/products/{id}',[ProductController::class,'update'])->middleware('auth:sanctum');

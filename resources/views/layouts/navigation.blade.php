@@ -8,6 +8,10 @@
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
+  --- <a href="{{ url('/myproducts') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">My Products</a>
+                        --- <a href="{{ url('/products') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Products</a>
+                        --- <a href="{{ url('/users') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Users</a>
+
                 </div>
 
                 <!-- Navigation Links -->
@@ -40,7 +44,8 @@
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+			 <!--   @csrf -->
+				 {{ csrf_field() }}
 
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
