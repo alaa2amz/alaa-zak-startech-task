@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductAjaxController;
 use App\Http\Controllers\UserAjaxController;
+use App\Http\Controllers\AssignAjaxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::resource('assign', AssignAjaxController::class);
+Route::resource('aaa', AssignAjaxController::class);
 Route::resource('products', ProductAjaxController::class);
 Route::resource('users', UserAjaxController::class);
 require __DIR__.'/auth.php';

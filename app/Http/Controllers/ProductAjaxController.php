@@ -28,6 +28,7 @@ class ProductAjaxController extends Controller
    
                            $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
     
+			    $btn =$btn. ' <a href="assign?product_id='.$row->id.'" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Assign" class="btn btn-primary btn-sm">Assign To USER</a>';
                             return $btn;
                     })
                     ->rawColumns(['action'])
@@ -81,6 +82,15 @@ class ProductAjaxController extends Controller
       
         return response()->json(['success'=>'Product deleted successfully.']);
     }
+
+
+
+  
+  
+
+
+
+
 }
 
 
