@@ -50,7 +50,7 @@
                 <th>Slug</th>
                 <th>Image</th>
                 <th>Description</th>
-                <th width="200px" >Users</th>
+                <th width="100px" >Users</th>
                 <th width="280px">Action</th>
             </tr>
         </thead>
