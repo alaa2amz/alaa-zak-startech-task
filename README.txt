@@ -28,6 +28,10 @@ these notes are
 
 	* the command "php artisan db:seed" can be run more than onece to double up the data
 
+	* API CURL end points and post man collection is inside root  folder
+	  I use always curl to check apis as commands in file text but converted it to
+	  to postman collection as well.
+	
 	* assign product to user is implemented by many to many using intermediate table(pivot table)
 	  product_user. for easing testing I did not apply constrain on (user_id,product_id) so
           so each user can be assigned the same product more than one. but I it was better to add quantity
@@ -49,6 +53,7 @@ these notes are
 
 	* in localhast:8000/users page beside every user there is list of 
           assigined products and full crud operations for users is available
+
 
 	* please let me know if part of the site that didnt work well to do more debugging
 
