@@ -55,7 +55,7 @@ these notes are
           assigined products and full crud operations for users is available
 
 
-	* please let me know if part of the site that didnt work well to do more debugging
+	* please let me know if part of the site that didnt work well to check it out
 
 	thanks in advance
 	alaa zakariya 2023
