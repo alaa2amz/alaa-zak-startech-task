@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-	    $admin=User::create(['first_name'=>'admin',
+	    try{
+	    $admin=User::insertOrIgnore(['first_name'=>'admin',
 		    'last_name'=>'admin',
 		    'email' => 'admin@admin.com',
 		    'phone_number'=>'0011111111111',
@@ -30,7 +31,7 @@ class DatabaseSeeder extends Seeder
 
 	    ]);   
 
-	     $notadmin=User::create(['first_name'=>'notadmin',
+	     $notadmin=User::insertOrIgnore(['first_name'=>'notadmin',
                     'last_name'=>'notadmin',
                     'email' => 'notadmin@notadmin.com',
                     'phone_number'=>'00222222222',
@@ -39,7 +40,8 @@ class DatabaseSeeder extends Seeder
 
             ]);
 	    
-	    $admin->roles()->attach('1');
+	    User::where('email','admin@admin.com')->first()->roles()->attach('1');
+		}catch(Throwable $e){}
 
          User::factory(self::$user_count)->create();
    	 Product::factory(self::$product_count)->create();
