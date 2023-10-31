@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
 		    'email' => 'admin@admin.com',
 		    'phone_number'=>'0011111111111',
 		    'email_verified_at'=>now(),
-		    'password'=>'password',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
 
 	    ]);   
 
@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
                     'email' => 'notadmin@notadmin.com',
                     'phone_number'=>'00222222222',
                     'email_verified_at'=>now(),
-                    'password'=>'password',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
 
             ]);
 	    
