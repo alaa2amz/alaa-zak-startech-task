@@ -29,8 +29,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/myproducts', [ProductAjaxController::class, 'myindex'])->name('myproducts');
 });
 
+##### ONLY ADMIN GROUP######
 Route::middleware('auth','is-admin')->group(function () {
 Route::resource('assign', AssignAjaxController::class);
 Route::resource('products', ProductAjaxController::class);

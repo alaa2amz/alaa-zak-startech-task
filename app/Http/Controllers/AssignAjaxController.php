@@ -18,11 +18,9 @@ class AssignAjaxController extends Controller
      */
     public function index(Request $request)
     {
-    echo "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"; 
         if ($request->ajax()) {
   
             $data = User::latest()->get();
-  
             return Datatables::of($data)
                     ->addIndexColumn()
 //                    ->addColumn('action', function($row){
@@ -36,7 +34,8 @@ class AssignAjaxController extends Controller
                     ->make(true);
         }
         
-        return view('assignAjax');
+ 		$product=Product::find($request->product_id); 
+        return view('assignAjax',['product'=>$product]);
     }
        
     /**

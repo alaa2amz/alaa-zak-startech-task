@@ -37,6 +37,37 @@ class ProductAjaxController extends Controller
         
         return view('productAjax');
     }
+
+
+
+    public function myindex(Request $request)
+    {
+     
+        if ($request->ajax()) {
+  
+            $data = $request->user()->products()->get();
+ 
+            return Datatables::of($data)->addIndexColumn()->make(true);
+                   // ->addIndexColumn()
+                   // ->addColumn('action', function($row){
+   
+                     //      $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
+   
+                       //    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
+    
+			 //   $btn =$btn. ' <a href="assign?product_id='.$row->id.'" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Assign" class="btn btn-primary btn-sm">Assign To USER</a>';
+                           // return $btn;
+         //           })
+                   // ->rawColumns(['action'])
+         //           ->make(true);
+        }
+        
+        return view('myproductAjax');
+        //return  $request->user()->products()->get();
+    }
+
+
+
        
     /**
      * Store a newly created resource in storage.

@@ -12,13 +12,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 </head>
+
 <body>
       
 <div class="container">
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">STARTECH</a>
+  <a class="navbar-brand" href="/"><img src="oo-star.svg" width="50px" /></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -49,7 +50,7 @@
                 <th>Slug</th>
                 <th>Image</th>
                 <th>Description</th>
-                <th>Users</th>
+                <th width="200px" >Users</th>
                 <th width="280px">Action</th>
             </tr>
         </thead>
@@ -130,7 +131,7 @@
             {data: 'slug', name: 'slug'},
             {data: 'image', name: 'image',render:x=>'<img src="'+x+'" width="128"  />'},
             {data: 'description', name: 'description'},
-            {data: 'user_list[]', name: 'user_list',render: array=> array.map(item=>'<a href="">'+'@ '+item+'</a>').join('<br/>')},
+            {data: 'user_list[]', name: 'user_list',render: array=> '<ul>'+array.map(item=>'<li>'+item+'</li>').join('')+'</ul>'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>USERS DASHBORD</title>
+    <title>PRODUCTS </title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
     <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -15,8 +15,10 @@
 <body>
       
 <div class="container">
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/"><img src="oo-star.svg" width="50px" /></a>
+  <a class="navbar-brand" href="#">STARTECH</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -26,7 +28,7 @@
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/products">Products</a>
+        <a class="nav-link" href="/users">Users</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/dashboard"></a>
@@ -34,19 +36,17 @@
     </ul>
   </div>
 </nav>
-    <h1>USERS DASHBOARD</h1>
-    <a class="btn btn-success" href="javascript:void(0)" id="createNewUser">Add New User</a>
+
+
+
+    <h1>{{Auth::user()->first_name.' '.Auth::user()->last_name}}'s products</h1>
     <table class="table table-bordered data-table">
         <thead>
             <tr>
                 <th>No</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th width="200px">Products list</th>
-              <!--  <th>Password</th> -->
-                <th width="280px">Action</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Description</th>
             </tr>
         </thead>
         <tbody>
@@ -61,34 +61,29 @@
                 <h4 class="modal-title" id="modelHeading"></h4>
             </div>
             <div class="modal-body">
-                <form id="userForm" name="userForm" class="form-horizontal">
-                   <input type="hidden" name="user_id" id="user_id">
+                <form id="productForm" name="productForm" class="form-horizontal">
+                   <input type="hidden" name="product_id" id="product_id">
                     <div class="form-group">
-                        <label for="first_name" class="col-sm-2 control-label">First Name</label>
+                        <label for="name" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter First Name" value="" maxlength="50" required="">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" value="" maxlength="50" required="">
                         </div>
-                        <label for="last_name" class="col-sm-2 control-label">Last Name</label>
+                        <label for="slug" class="col-sm-2 control-label">Slug</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter Last Name" value="" maxlength="50" required="">
+                            <input type="text" class="form-control" id="slug" name="slug" placeholder="Enter Slug" value="" maxlength="50" required="">
                         </div>
-                        <label for="email" class="col-sm-2 control-label">Email</label>
+                        <label for="image" class="col-sm-2 control-label">Image</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email" value="" maxlength="50" required="">
+                            <input type="text" class="form-control" id="image" name="image" placeholder="Image url/name" value="" maxlength="50" required="">
                         </div>
-                        <label for="phone_number" class="col-sm-2 control-label">Phone Number</label>
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Enter Phone Number" value="" maxlength="50" required="">
-                        </div>
-                        <label for="password" class="col-sm-2 control-label">Password</label>
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" id="password" name="password" placeholder="Enter Password" value="" maxlength="50" required="">
-                        </div>
-                    </div>
-                    </div>
-                    </div>
                     </div>
        
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Description</label>
+                        <div class="col-sm-12">
+                            <textarea id="description" name="description" required="" placeholder="Enter Details" class="form-control"></textarea>
+                        </div>
+                    </div>
         
                     <div class="col-sm-offset-2 col-sm-10">
                      <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes
@@ -124,30 +119,31 @@
     var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('users.index') }}",
+        ajax: "{{ route('myproducts') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'first_name', name: 'first_name'},
-            {data: 'last_name', name: 'last_name'},
-            {data: 'email', name: 'email'},
-            {data: 'phone_number', name: 'phone_number'},
-            {data: 'product_list[]', name: 'product_list',render: array=> '<ul>'+array.map(item=>'<li>'+item+'</li>').join('')+'</ul>'},
-            //{data: 'product_list[, ]', name: 'product_list'},
-            //{data: 'password', name: 'password'},
-            {data: 'action', name: 'action', orderable: false, searchable: false},
+            {data: 'name', name: 'name'},
+           // {data: 'slug', name: 'slug'},
+            {data: 'image', name: 'image',render:x=>'<img src="'+x+'" width="128"  />'},
+            {data: 'description', name: 'description'},
+           // {data: 'user_list[]', name: 'user_list',render: array=> array.map(item=>'<a href="">'+'@ '+item+'</a>').join('<br/>')},
+            //{data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
+
+
+
       
     /*------------------------------------------
     --------------------------------------------
     Click to Button
     --------------------------------------------
     --------------------------------------------*/
-    $('#createNewUser').click(function () {
-        $('#saveBtn').val("create-user");
-        $('#user_id').val('');
-        $('#userForm').trigger("reset");
-        $('#modelHeading').html("Create New User");
+    $('#createNewProduct').click(function () {
+        $('#saveBtn').val("create-product");
+        $('#product_id').val('');
+        $('#productForm').trigger("reset");
+        $('#modelHeading').html("Create New Product");
         $('#ajaxModel').modal('show');
     });
       
@@ -156,18 +152,17 @@
     Click to Edit Button
     --------------------------------------------
     --------------------------------------------*/
-    $('body').on('click', '.editUser', function () {
-      var user_id = $(this).data('id');
-      $.get("{{ route('users.index') }}" +'/' + user_id +'/edit', function (data) {
-          $('#modelHeading').html("Edit User");
+    $('body').on('click', '.editProduct', function () {
+      var product_id = $(this).data('id');
+      $.get("{{ route('products.index') }}" +'/' + product_id +'/edit', function (data) {
+          $('#modelHeading').html("Edit Product");
           $('#saveBtn').val("edit-user");
           $('#ajaxModel').modal('show');
-          $('#user_id').val(data.id);
-          $('#first_name').val(data.first_name);
-          $('#last_name').val(data.last_name);
-          $('#email').val(data.email);
-          $('#phone_number').val(data.phone_number);
-          $('#password').val(data.password);
+          $('#product_id').val(data.id);
+          $('#name').val(data.name);
+          $('#slug').val(data.slug);
+          $('#image').val(data.image);
+          $('#description').val(data.description);
       })
     });
       
@@ -181,13 +176,13 @@
         $(this).html('Sending..');
       
         $.ajax({
-          data: $('#userForm').serialize(),
-          url: "{{ route('users.store') }}",
+          data: $('#productForm').serialize(),
+          url: "{{ route('products.store') }}",
           type: "POST",
           dataType: 'json',
           success: function (data) {
        
-              $('#userForm').trigger("reset");
+              $('#productForm').trigger("reset");
               $('#ajaxModel').modal('hide');
               table.draw();
            
@@ -204,14 +199,14 @@
     Delete Product Code
     --------------------------------------------
     --------------------------------------------*/
-    $('body').on('click', '.deleteUser', function () {
+    $('body').on('click', '.deleteProduct', function () {
      
-        var user_id = $(this).data("id");
+        var product_id = $(this).data("id");
         confirm("Are You sure want to delete !");
         
         $.ajax({
             type: "DELETE",
-            url: "{{ route('users.store') }}"+'/'+user_id,
+            url: "{{ route('products.store') }}"+'/'+product_id,
             success: function (data) {
                 table.draw();
             },

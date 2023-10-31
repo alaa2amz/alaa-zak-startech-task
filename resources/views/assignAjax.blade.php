@@ -15,8 +15,8 @@
 <body>
       
 <div class="container">
-    <h1>ASSIGN</h1>
-    <a class="btn btn-success" href="javascript:void(0)" id="createNewUser">Add New User</a>
+    <h2>Assign <span style="color:red;font-style:italic">{{$product->name }}</span> Product to a User:</h2>
+	<h3>please choose one<h3>
     <table class="table table-bordered data-table">
         <thead>
             <tr>
@@ -25,7 +25,7 @@
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
-                <th>Products list</th>
+                <th width="280px">Products list</th>
               <th>assign</th>
              <!--   <th width="280px">Action</th> -->
             </tr>
@@ -123,7 +123,7 @@
             {data: 'last_name', name: 'last_name'},
             {data: 'email', name: 'email'},
             {data: 'phone_number', name: 'phone_number'},
-            {data: 'product_list[]', name: 'product_list',render: array=> array.map(item=>'<a href="">'+'@ '+item+'</a>').join('<br/>')},
+            {data: 'product_list[]', name: 'product_list',render: array=> '<ul>'+array.map(item=>'<li>'+item+'</li>').join('')},
 	{data: 'id', name: 'id',render: item=> '<form action="/assign" method="POST"><input type="hidden" name="_token" value="{{ csrf_token()}}" /><input type="hidden" id="product_id" name="product_id" value="'+product_id+'"><input type="hidden" id="user_id" name="user_id" value="'+item+'"><input type="submit" value="CHOOSE"></form>'
 
 
