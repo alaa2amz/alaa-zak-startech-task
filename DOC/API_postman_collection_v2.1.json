@@ -1,0 +1,537 @@
+{
+	"info": {
+		"_postman_id": "26a890df-0241-4301-937d-e97f4e6af9db",
+		"name": "star-tech",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30799457"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8000/api/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "first_name",
+							"value": "ali",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "hamed",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "alihamed@gmail.com.com",
+							"type": "text"
+						},
+						{
+							"key": "phone_number",
+							"value": "0111232345",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"register"
+					]
+				},
+				"description": "regester new user:"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/verify",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "alihamed@gmail.com.com",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "9904",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/verify",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"verify"
+					]
+				},
+				"description": "verify user:"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "alihamed@gmail.com.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login"
+					]
+				},
+				"description": "login with email:"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "phone_number",
+							"value": "0111232345",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login"
+					]
+				},
+				"description": "login with phone number:"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/user/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/user/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						""
+					]
+				},
+				"description": "get user information:"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/user/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "first_name",
+							"value": "alaa",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "zaak",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "alihamed@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "phone_number",
+							"value": "0112232345",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/user/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						""
+					]
+				},
+				"description": "update user information:"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/reset-password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "new_password",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/reset-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"reset-password"
+					]
+				},
+				"description": "change password:"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/products",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "kanji",
+							"type": "text"
+						},
+						{
+							"key": "slug",
+							"value": "ccz",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"value": "kanji.jpg",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "dictionary",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"products"
+					]
+				},
+				"description": "create product:"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/products/1339",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/products/1339",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"products",
+						"1339"
+					]
+				},
+				"description": "get product information:"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/products/1343",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "kanji",
+							"type": "text"
+						},
+						{
+							"key": "slug",
+							"value": "ccz",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"value": "kanji.jpg",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "dddddictionary",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/products/1343",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"products",
+						"1343"
+					]
+				},
+				"description": "update product:"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/products/1343",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/products/1343",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"products",
+						"1343"
+					]
+				},
+				"description": "delete product:"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/products",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"products"
+					]
+				},
+				"description": "get all products with pagination:"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/products/user/assign",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "product_id",
+							"value": "1339",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/products/user/assign",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"products",
+						"user",
+						"assign"
+					]
+				},
+				"description": "assign product to user:"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/user/products",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 5|XJVY1Hao2ZXzIXnFvxUFdE1p5LngCaXbbNAPnafc9b3330b1"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/user/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"products"
+					]
+				},
+				"description": "get logged user products with pagination:"
+			},
+			"response": []
+		}
+	]
+}
